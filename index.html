@@ -6,13 +6,12 @@
     div.celan {
       background-color: rgba(0, 0, 0, 0);
       width: 90px;
-      height: 600px;
+      height: 100%;
       border-color: black;
       position: fixed;
       border-radius: 0px 25px 25px 0px;
       box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .5);
-      margin-left: -10px;
-      margin-top: 20px;
+      margin-left: -6px;
     }
 
     body {
@@ -22,20 +21,28 @@
     }
 
     .tx {
+      transition: all 0.5s ease;
       border-radius: 50px;
       width: 90px;
     }
+
+    .tx:hover {
+      transition: all 0.5s ease;
+      transform:rotate(360deg);
+    }
+
     .game {
       transition: all 0.5s ease;
-      border-radius: 25px;
-      color:#fff;
+      border-radius: 10px;
+      color: #fff;
       text-align: center;
-      height: 70px;
+      height: 50px;
     }
+
     .game:hover {
       transition: all 0.5s ease;
       background-color: #fff;
-      color:#000;
+      color: #000;
     }
   </style>
   <script>
@@ -48,8 +55,11 @@
       <image class="tx" src="https://cdn.luogu.com.cn/upload/image_hosting/b7gsgrjl.png"></image>
     </a>
     <div class="game">
-      Game
+      <div class="ga">
+        Game
+      </div>
     </div>
+
   </div>
 </body>
 
