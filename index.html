@@ -35,15 +35,28 @@
     .ce {
       transition: all 0.5s ease;
       border-radius: 10px;
-      color: #fff;
       text-align: center;
       height: 50px;
+    }
+
+    .ce>a {
+      transition: all 0.5s ease;
+      color: #fff;
+    }
+
+    .ce:hover>a {
+      transition: all 0.5s ease;
+      color: #000;
     }
 
     .ce:hover {
       transition: all 0.5s ease;
       background-color: #fff;
-      color: #000;
+      color: #000 !important;
+    }
+
+    a {
+      text-decoration: none;
     }
   </style>
   <script>
@@ -56,10 +69,10 @@
       <image class="tx" src="https://cdn.luogu.com.cn/upload/image_hosting/b7gsgrjl.png"></image>
     </a>
     <div class="ce">
-      Game
+      <a href="https://xzy-home.github.io/game.html" target="_blank">Game</a>
     </div>
     <div class="ce">
-      Works
+      <a href="https://xzy-home.github.io/works.html" target="_blank">Works</a>
     </div>
   </div>
 </body>
