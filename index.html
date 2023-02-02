@@ -1,32 +1,26 @@
 ﻿<html>
 
 <head>
-  <title>xzy-home</title>
+  <title>index</title>
   <style>
-    @keyframes lfe {
-      from {
-        margin-top: -100px;
-      }
-      to {
-        margin-top: 100px;
-      }
-    }
     .celan {
       background-color: rgba(0, 0, 0, 0);
       width: 100px;
-      height: 700px;
+      height: 600px;
       border-color: black;
       position: fixed;
       border-radius: 0px 25px 25px 0px;
       box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .5);
       margin-left: -6px;
       font-size: 20px;
-      margin-top: -670px!important;
+      margin-top: -670px !important;
     }
 
     body {
       background-image: url('https://cdn.luogu.com.cn/upload/image_hosting/tjr12qai.png');
-      background-size: 100% 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       background-attachment: fixed;
     }
 
@@ -41,17 +35,17 @@
       transform: rotate(360deg);
     }
 
-    .ce {
+    .celan div a {
       transition: all 0.5s ease;
       border-radius: 20px;
       height: 50px;
       color: #fff;
       padding-left: 20px;
       padding-top: 20px;
-      padding-bottom: 20px;
+      padding-bottom: 50px;
     }
 
-    .ce:hover {
+    .celan div a:hover {
       transition: all 0.5s ease;
       color: #000;
       background-color: #fff;
@@ -60,26 +54,36 @@
     a {
       text-decoration: none;
     }
-    .k {
-      margin-top: 40px;
-    }
+
     .lfe {
       transition: all 0.5s ease;
-      background-color: #ffffffc2; 
+      background-color: #ffffffc2;
       margin-left: 200px;
       height: 650px;
       width: 1300px;
       border-radius: 20px;
       margin-top: 50px;
     }
+
     .lfe:hover {
       transition: all 0.5s ease;
       background-color: #fff;
       box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .5);
     }
+
     h1,
-    li{
+    li {
       margin-left: 20px;
+    }
+
+    .lfe li a {
+      font-size: 25px;
+      color: rgb(96, 30, 196);
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    .lfe li a:active {
+      color: rgb(183, 147, 238);
     }
   </style>
   <script>
@@ -91,16 +95,18 @@
     <h1>更新日志</h1>
     <li>2022.10.8 创建</li>
     <li>2022.10.22 主体做完</li>
+    <h1>友链</h1>
+    <li><a href="https://www.luogu.com.cn/user/542389">洛谷主页</a></li>
   </div>
   <div class="celan">
     <a href="https://xzy-home.github.io/">
       <image class="tx" src="https://cdn.luogu.com.cn/upload/usericon/542389.png"></image>
     </a>
-    <div class="k">
-      <a class="ce" href="https://xzy-home.github.io/game.html" style="padding-right: 23px">Game</a>
+    <div style="margin-top:20px">
+      <a href="https://xzy-home.github.io/game.html" style="padding-right: 23px">Game</a>
     </div>
-    <div class="k">
-      <a class="ce" href="https://xzy-home.github.io/works.html"style="padding-right: 20px">Works</a>
+    <div style="margin-top:70px">
+      <a href="https://xzy-home.github.io/works.html" style="padding-right: 20px">Works</a>
     </div>
   </div>
 </body>
