@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>计算器</title>
+    <style>
+        span {
+            border-radius: 15px;
+            border-color: #000;
+            background-color: rgb(207, 207, 207);
+            padding-top: 13px;
+            padding-bottom: 13px;
+        }
+
+        p.first {
+            width: 390px;
+            border-style: solid;
+            height: 40px;
+            background-color: white;
+            border-color: black;
+            text-align: right;
+            font-size: 20px;
+        }
+
+        div p.first,
+        div button {
+            font-size: 30px;
+        }
+
+        body {
+            /*background-image: url('https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg');*/
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        html {
+            font-size: 30px;
+        }
+    </style>
+    <script>
+        function myfunction(str) {
+            var s = document.querySelectorAll("p")[0].innerHTML;
+            if (str == "AC") {
+                document.querySelectorAll("p")[0].innerHTML = "";
+            }
+            else if ((document.querySelectorAll("p")[0].innerHTML == "" || s[s.length - 1] == '.' || s[s.length - 1] == "+" || s[s.length - 1] == "-" || s[s.length - 1] == "x" || s[s.length - 1] == '/') && str == ".") {
+                return;
+            }
+            else if ((str == "+" || str == "-" || str == "*" || str == "/") && (('0' > s[s.length - 1] || s[s.length - 1] > '9') || s == "")) {
+                return;
+            }
+            else if (document.querySelectorAll("p")[0].innerHTML == "") {
+                document.querySelectorAll("p")[0].innerHTML = str;
+            }
+            else {
+                if (document.querySelectorAll("p")[0].innerHTML.length == 20) {
+                    return;
+                }
+                document.querySelectorAll("p")[0].innerHTML += str;
+            }
+        }
+        function jisuan() {
+            var str = document.querySelectorAll('p')[0].innerHTML, x = 0, a, b, c = "", flag = 0, xx = 1;
+            if (str == "") {
+                alert("Error!");
+                return;
+            }
+            for (var i = 0; i < str.length; i++) {
+                if ('0' <= str[i] && str[i] <= '9') {
+                    var s = new Object;
+                    s = str[i] - '0';
+                    if (flag) {
+                        xx *= 0.1;
+                        x = x + s * xx;
+                    }
+                    else {
+                        x = x * 10 + s;
+                    }
+                }
+                else if (str[i] == '.') {
+                    flag = 1;
+                }
+                else {
+                    c = str[i];
+                    a = x;
+                    x = 0;
+                    xx = 1;
+                    flag = 0;
+                }
+            }
+            var ans = 0;
+            if (c == "") {
+                ans = parseFloat((x).toFixed(15));
+            }
+            else if (c == "+") {
+                ans = parseFloat((a + x).toFixed(15));
+            }
+            else if (c == '-') {
+                ans = parseFloat((a - x).toFixed(15));
+            }
+            else if (c == '*') {
+                ans = parseFloat((a * x).toFixed(15));
+            }
+            else if (c == '/') {
+                if (x == 0) {
+                    alert("Error!");
+                    document.querySelectorAll('p')[0].innerHTML = "";
+                    return;
+                }
+                ans = parseFloat((a / x).toFixed(15));
+            }
+            else {
+                alert("Error!");
+                document.querySelectorAll('p')[0].innerHTML = "";
+                return;
+            }
+            if (ans > 100000000000000) {
+                alert("Error!");
+                document.querySelectorAll('p')[0].innerHTML = "";
+                return;
+            }
+            else {
+                document.querySelectorAll('p')[0].innerHTML = ans;
+            }
+        }
+        function back() {
+            var str1 = document.querySelectorAll('p')[0].innerHTML, str2 = "";
+            if (str1.length < 2) {
+                document.querySelectorAll('p')[0].innerHTML = "";
+                return;
+            }
+            for (var i = 0; i < str1.length - 1; i++) {
+                str2 += str1[i];
+            }
+            document.querySelectorAll('p')[0].innerHTML = str2;
+        }
+        document.onkeydown = function (e) {
+            if ((e.keyCode == 187 && e.shiftKey) || e.keyCode == 107) {
+                myfunction('+');
+                return;
+            }
+            if ((e.keyCode == 56 && e.shiftKey) || e.keyCode == 106) {
+                myfunction('*');
+                return;
+            }
+            if (e.keyCode == 48 && e.shiftKey) {
+                myfunction(')');
+                return;
+            }
+            if (e.keyCode == 57 && e.shiftKey) {
+                myfunction('(');
+                return;
+            }
+            switch (e.keyCode || e.which) {
+                case 8: back(); break;
+                case 13: jisuan(); break;
+                case 48: myfunction('0'); break;
+                case 49: myfunction('1'); break;
+                case 50: myfunction('2'); break;
+                case 51: myfunction('3'); break;
+                case 52: myfunction('4'); break;
+                case 53: myfunction('5'); break;
+                case 54: myfunction('6'); break;
+                case 55: myfunction('7'); break;
+                case 56: myfunction('8'); break;
+                case 57: myfunction('9'); break;
+                case 96: myfunction('0'); break;
+                case 97: myfunction('1'); break;
+                case 98: myfunction('2'); break;
+                case 99: myfunction('3'); break;
+                case 100: myfunction('4'); break;
+                case 101: myfunction('5'); break;
+                case 102: myfunction('6'); break;
+                case 103: myfunction('7'); break;
+                case 104: myfunction('8'); break;
+                case 105: myfunction('9'); break;
+                case 108: jisuan(); break;
+                case 109: myfunction('-'); break;
+                case 110: myfunction('.'); break;
+                case 111: myfunction('/'); break;
+                case 187: jisuan(); break;
+                case 189: myfunction('-'); break;
+                case 190: myfunction('.'); break;
+                case 191: myfunction('/'); break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div align="center">
+        <p class="first"></p>
+        <div>
+            <p>
+                <span style="padding-left:42.5px;padding-right:42.5px;" onclick="myfunction('(')">(</span>
+                <span style="padding-left:42.5px;padding-right:42.5px;" onclick="myfunction(')')">)</span>
+                <span style="padding-left:16.68px;padding-right:16.68px;background-color: rgba(2, 2, 253, 0.719);"onclick="back()">Back</span>
+                <span style="padding-left:26.66px;padding-right:26.66px;background-color: orange;" onclick="myfunction('AC')">AC</span>
+            </p>
+            <p>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('7')">7</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('8')">8</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('9')">9</span>
+                <span style="padding-left:43.33px;padding-right:43.33px;" onclick="myfunction('/')">/</span>
+            </p>
+            <p>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('4')">4</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('5')">5</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('6')">6</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('*')">*</span>
+            </p>
+            <p>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('1')">1</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('2')">2</span>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('3')">3</span>
+                <span style="padding-left:42.5px;padding-right:42.5px;" onclick="myfunction('-')">-</span>
+            </p>
+            <p>
+                <span style="padding-left:40px;padding-right:40px;" onclick="myfunction('0')">0</span>
+                <span style="padding-left:43.75px;padding-right:43.75px;" onclick="myfunction('.')">.</span>
+                <span style="padding-left:39.04px;padding-right:39.04px;background-color: green;" onclick="jisuan()">=</span>
+                <span style="padding-left:39.04px;padding-right:39.04px;" nclick="myfunction('+')">+</span>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
