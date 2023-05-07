@@ -41,12 +41,18 @@
         }
     </style>
     <script>
+        function jd(x) {
+            return parseFloat((x).toFixed(15));
+        }
         function myfunction(str) {
             var s = document.querySelectorAll("p")[0].innerHTML;
             if (str == "AC") {
                 document.querySelectorAll("p")[0].innerHTML = "";
             }
             else if ((document.querySelectorAll("p")[0].innerHTML == "" || s[s.length - 1] == '.' || s[s.length - 1] == "+" || s[s.length - 1] == "-" || s[s.length - 1] == "x" || s[s.length - 1] == '/') && str == ".") {
+                return;
+            }
+            else if (str == '-' && (s.length == 1 || s[s.length - 2] == '-') && s[s.length - 1] == '-') {
                 return;
             }
             else if ((str == "+" || str == "*" || str == "/") && (('0' > s[s.length - 1] || s[s.length - 1] > '9') || s == "")) {
@@ -63,7 +69,7 @@
             }
         }
         function jisuan() {
-            var str = document.querySelectorAll('p')[0].innerHTML, x = 0, a, b, c = "", flag = 0, xx = 1, f = 1;
+            var str = document.querySelectorAll('p')[0].innerHTML, x = 0, a = new Array(), b, c = new Array(), flag = 0, xx = 1, f = 1, cnt = 0;
             if (str == "") {
                 alert("Error!");
                 return;
@@ -87,8 +93,8 @@
                     flag = 1;
                 }
                 else {
-                    c = str[i];
-                    a = x * f;
+                    c[++cnt] = str[i];
+                    a[cnt] = x * f;
                     x = 0;
                     xx = 1;
                     flag = 0;
@@ -96,31 +102,76 @@
                 }
             }
             x *= f;
+            a[++cnt] = x;
+            a[0] = 1;
             var ans = 0;
-            if (c == "") {
-                ans = parseFloat((x).toFixed(15));
-            }
-            else if (c == "+") {
-                ans = parseFloat((a + x).toFixed(15));
-            }
-            else if (c == '-') {
-                ans = parseFloat((a - x).toFixed(15));
-            }
-            else if (c == '*') {
-                ans = parseFloat((a * x).toFixed(15));
-            }
-            else if (c == '/') {
-                if (x == 0) {
-                    alert("Error!");
-                    document.querySelectorAll('p')[0].innerHTML = "";
-                    return;
-                }
-                ans = parseFloat((a / x).toFixed(15));
+            if (c[1] == "") {
+                ans = jd(ans);
             }
             else {
-                alert("Error!");
-                document.querySelectorAll('p')[0].innerHTML = "";
-                return;
+                ans = a[1];
+                for (var i = 1; i < cnt; i++) {
+                    if (c[i + 1] != '*' && c[i + 1] != '/') {
+                        if (c[i] == '+') {
+                            ans += a[i + 1];
+                            ans = jd(ans);
+                        }
+                        else if (c[i] == '-') {
+                            ans -= a[i + 1];
+                            ans = jd(ans);
+                        }
+                        else if (c[i] == '*') {
+                            ans *= a[i + 1];
+                            ans = jd(ans);
+                        }
+                        else if (c[i] == '/') {
+                            ans /= a[i + 1];
+                            ans = jd(ans);
+                        }
+                    }
+                    else {
+                        var ch = c[i], sum1 = a[++i], sum2 = a[i];
+                        for (; i < cnt; i++) {
+                            if (c[i] == '*') {
+                                sum1 *= a[i + 1];
+                                sum1 = jd(sum1);
+                                sum2 /= a[i + 1];
+                                sum2 = jd(sum2);
+                            }
+                            else if (c[i] == '/') {
+                                if (a[i + 1] == 0) {
+                                    alert("Error!");
+                                    document.querySelectorAll('p')[0].innerHTML = "";
+                                    return;
+                                }
+                                sum1 /= a[i + 1];
+                                sum1 = jd(sum1);
+                                sum2 *= a[i + 1];
+                                sum2 = jd(sum2);
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                        if (ch == '+') {
+                            ans += sum1;
+                        }
+                        else if (ch == '-') {
+                            ans -= sum1;
+                        }
+                        else if (ch == '*') {
+                            ans *= sum1;
+                        }
+                        else if (ch == '/') {
+                            ans /= sum2;
+                        }
+                        else {
+                            ans = sum1;
+                        }
+                        ans = jd(ans);
+                        i--;
+                    }
+                }
             }
             if (ans > 100000000000000) {
                 alert("Error!");
@@ -192,6 +243,7 @@
                 case 191: myfunction('/'); break;
             }
         }
+
     </script>
 </head>
 
