@@ -41,8 +41,7 @@
         }
     </style>
     <script>
-        var n = 0;  
-        function jd(x) {
+        function jd(x, n) {
             return (x).toFixed(n);
         }
         function myfunction(str) {
@@ -106,10 +105,9 @@
             x *= f;
             a[++cnt] = x;
             a[0] = 1;
-            var ans = 0;
-            n = prompt("请输入想要保留几位小数", "0");
+            var ans = 0, num = prompt("请输入想要保留几位小数", "0");
             if (c[1] == "") {
-                ans = jd(a[1]);
+                ans = a[1];
             }
             else {
                 ans = a[1];
@@ -117,19 +115,15 @@
                     if (c[i + 1] != '*' && c[i + 1] != '/') {
                         if (c[i] == '+') {
                             ans += a[i + 1];
-                            ans = jd(ans);
                         }
                         else if (c[i] == '-') {
                             ans -= a[i + 1];
-                            ans = jd(ans);
                         }
                         else if (c[i] == '*') {
                             ans *= a[i + 1];
-                            ans = jd(ans);
                         }
                         else if (c[i] == '/') {
                             ans /= a[i + 1];
-                            ans = jd(ans);
                         }
                     }
                     else {
@@ -137,9 +131,7 @@
                         for (; i < cnt; i++) {
                             if (c[i] == '*') {
                                 sum1 *= a[i + 1];
-                                sum1 = jd(sum1);
                                 sum2 /= a[i + 1];
-                                sum2 = jd(sum2);
                             }
                             else if (c[i] == '/') {
                                 if (a[i + 1] == 0) {
@@ -148,9 +140,7 @@
                                     return;
                                 }
                                 sum1 /= a[i + 1];
-                                sum1 = jd(sum1);
                                 sum2 *= a[i + 1];
-                                sum2 = jd(sum2);
                             }
                             else {
                                 break;
@@ -171,7 +161,6 @@
                         else {
                             ans = sum1;
                         }
-                        ans = jd(ans);
                         i--;
                     }
                 }
@@ -182,7 +171,7 @@
                 return;
             }
             else {
-                document.querySelectorAll('p')[0].innerHTML = ans;
+                document.querySelectorAll('p')[0].innerHTML = jd (ans, num);
             }
         }
         function back() {
