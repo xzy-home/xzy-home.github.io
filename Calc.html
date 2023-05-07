@@ -41,8 +41,9 @@
         }
     </style>
     <script>
+        var n = 0;  
         function jd(x) {
-            return parseFloat((x).toFixed(15));
+            return (x).toFixed(n);
         }
         function myfunction(str) {
             var s = document.querySelectorAll("p")[0].innerHTML;
@@ -74,6 +75,7 @@
                 alert("Error!");
                 return;
             }
+            c[1] = "";
             for (var i = 0; i < str.length; i++) {
                 if (str[i] == '-' && (i == 0 || str[i - 1] > '9' || str[i - 1] < '0')) {
                     f = -1;
@@ -105,8 +107,9 @@
             a[++cnt] = x;
             a[0] = 1;
             var ans = 0;
+            n = prompt("请输入想要保留几位小数", "0");
             if (c[1] == "") {
-                ans = jd(ans);
+                ans = jd(a[1]);
             }
             else {
                 ans = a[1];
